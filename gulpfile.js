@@ -41,6 +41,7 @@ gulp.task('js', function() {
     .pipe(uglify())
     // Output
     .pipe(gulp.dest('./dist/js'))
+    .pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('browser-sync', function() {
@@ -61,6 +62,7 @@ gulp.task('browser-sync', function() {
 
 gulp.task('watch', function () {
     gulp.watch(sassWatchPath, ['sass']);
+    gulp.watch(jsWatchPath, ['js']);
     gulp.watch(htmlWatchPath, function () {
         return gulp.src('')
             .pipe(browserSync.reload({stream: true}))

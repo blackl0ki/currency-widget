@@ -3,7 +3,7 @@
 	this.CurrencyWidget = function () {
 
 		var defaults = {
-			url: 'https://www.tcmb.gov.tr/kurlar/today.xml',
+			url: 'https://www.macitturizm.org/afgcbdhaaa3i3iF63722bbfd5373833.xml',
 			containerId: null,
 			container: null,
 			currencies: null,
@@ -30,6 +30,10 @@
 	}
 
 	function buildCurrencies () {
+
+		if ( !this.options.currencies ) {
+			console.log('currencies not found!');
+		}
 
 		var hasCurrency = false;
 		this.options.container.style.background = this.options.backColor;
@@ -100,7 +104,7 @@
 
 					tbody.appendChild(row);
 				} else {
-					var msg = item.Isim['#text'] + ' alış ve satış değeri bulunamadı!';
+					var msg = item.Isim['#text'] + ' not found!';
 					console.log(msg);
 				}
 
@@ -122,8 +126,12 @@
 
 		var responseParser = function () {
 
-			self.options.currencies = xmlToJson(this.responseXML);
-			buildCurrencies.call(self);
+			if ( xhr.status === 200 ) {
+				self.options.currencies = xmlToJson(this.responseXML);
+				buildCurrencies.call(self);
+			} else {
+				console.log('currencies not found!');
+			}
 
 		}
 
