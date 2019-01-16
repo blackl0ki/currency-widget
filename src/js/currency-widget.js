@@ -129,7 +129,7 @@
 
 		var xhr = new XMLHttpRequest();
 		xhr.addEventListener('load', responseParser);
-		xhr.open( 'GET', this.options.url, false );
+		xhr.open( 'GET', this.options.url, true );
 		xhr.send(null);
 
 	}
